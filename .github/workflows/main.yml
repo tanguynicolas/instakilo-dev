@@ -24,6 +24,6 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
           scp -r * root@$SERVER_IP:/var/www/html
     env:
-      SSH_PRIVATE_KEY: ${{secrets.SSH_KEY}}
-      SERVER_IP: ${{secrets.SERVER_IP}}
+      SSH_PRIVATE_KEY: ${{secrets.SSHKEY_RASPBERRY}}
+      SERVER_IP: ${{secrets.IP_RASPBERRY}}
       CI: false
