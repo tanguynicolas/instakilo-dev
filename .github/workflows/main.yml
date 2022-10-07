@@ -4,23 +4,17 @@ on:
     branches: [ 'main' ]
     
 jobs:
-  deploy_job:
-    name: Deploy Job
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: SSH setup
-        env:
-          DEPLOY_KEY: ${{secrets.SSHKEY_RASPBERRY}}
-          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
-          SERVER_IP: ${{secrets.IP_RASPBERRY}}
-          RSYNC_USER: 'rpi'
-        run: |
-          mkdir -p ~/.ssh
-          echo "${KNOWN_HOSTS}" >> ~/.ssh/known_hosts
-          echo "${DEPLOY_KEY}" > ~/.ssh/my_rsync_key
-          echo "IdentityFile ~/.ssh/my_rsync_key" >> ~/.ssh/config
-          chmod -R 700 ~/.ssh        
-      - name: Rsync deployment
-        run: |
-          rsync -avz -e ssh -p 24680 --delete public/ ${RSYNC_USER}@${{secrets.IP_RASPBERRY}}:/var/www/
+    - uses: actions/checkout@v2
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@5.2.1
+      with:
+        switches: -avzr --delete --exclude="" --include="" --filter=""
+        path: .
+        remote_path: ${{ secrets.DEPLOY_PATH }}
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_key: ${{ secrets.DEPLOY_KEY }}
