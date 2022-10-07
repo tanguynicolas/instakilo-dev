@@ -12,7 +12,7 @@ jobs:
       - name: SSH setup
         env:
           DEPLOY_KEY: ${{secrets.SSHKEY_RASPBERRY}}
-          KNOWN_HOSTS: ${{ secrets.KNOWN_HOST }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
           SERVER_IP: ${{secrets.IP_RASPBERRY}}
           RSYNC_USER: 'rpi'
         run: |
