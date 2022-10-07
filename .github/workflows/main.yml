@@ -23,4 +23,4 @@ jobs:
           chmod -R 700 ~/.ssh        
       - name: Rsync deployment
         run: |
-          rsync -avz -e ssh --delete public/ ${RSYNC_USER}@${{secrets.IP_RASPBERRY}}:/var/www/
+          rsync -avz -e 'ssh -p 24680' --delete public/ ${RSYNC_USER}@${{secrets.IP_RASPBERRY}}:/var/www/
