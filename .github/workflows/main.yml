@@ -22,7 +22,7 @@ jobs:
           chmod 700 ~/.ssh
           ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-          scp -r * root@$SERVER_IP:/var/www/html
+          scp -P 24680 -r * rpi@$SERVER_IP:/var/www/html
     env:
       SSH_PRIVATE_KEY: ${{secrets.SSHKEY_RASPBERRY}}
       SERVER_IP: ${{secrets.IP_RASPBERRY}}
