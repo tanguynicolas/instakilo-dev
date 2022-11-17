@@ -1,0 +1,29 @@
+{
+  "name": "instakilo",
+  "version": "1.0.0",
+  "description": "Application web de clavardage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tanguy00/instakilo-dev.git"
+  },
+  "keywords": [
+    "node",
+    "nginx",
+    "chat",
+    "clavardage"
+  ],
+  "author": "William Djeneba Benjamin Tanguy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tanguy00/instakilo-dev/issues"
+  },
+  "homepage": "https://github.com/Tanguy00/instakilo-dev#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.5.3"
+  }
+}
