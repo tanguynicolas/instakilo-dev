@@ -26,6 +26,13 @@ docker push tanguynicolas/instakilo-node:latest
 
 ## Docker : déploiement individuel
 ```bash
-docker run -d --rm -p 80:80 --name instakilo-nginx instakilo-nginx
-docker run -d --rm -p 3000:3000 --name instakilo-node instakilo-node
+docker network create instakilo-network
+
+docker run -d --rm -p 3000:3000 --network instakilo-network --name instakilo-node  instakilo-node
+docker run -d --rm -p 80:80     --network instakilo-network --name instakilo-nginx instakilo-nginx
+```
+
+## Docker : déploiement multiple
+```bash
+docker compose up -d
 ```
