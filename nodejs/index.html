@@ -3,51 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <title>Instakilo</title>
 </head>
-    <style>
-
-        body{
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-        }
-
-        #messageBox{
-            border: 1px solid black;
-            height: 90vh;
-        }
-
-        #messageBox p{
-            margin: 0;
-            padding: 10px;
-        }
-
-        #messageBox  :nth-child(odd){
-            background-color: #aaa;
-        }
-
-        form{
-          display: flex;
-        }
-
-        #nom{
-            flex: 1;
-            padding: 10px;             
-        }
-
-        #message{
-            flex: 5;
-            padding: 10px;
-        }
-        
-        button{
-            flex: 1;
-            padding: 10px;
-            border: none;
-            background-color: #839dfe;
-            color: white;
-        }
-  </style>
 
 <body>
 
@@ -80,29 +38,13 @@
                 document.querySelector("#message").value = "";
             });
 
-            //Ecoute de l'evenement "chat_message"
-            socket.on("chat_message", (msg) => {
+            //Ecoute de l'evenement "received_message"
+            socket.on("received_message", (msg) => {
                 document.querySelector("#messageBox").innerHTML += `<p>${msg.nom} dit ${msg.message}</p>`
             })
 
         }
     </script>
-
-   <!-- 
-   <script>
-    const socket = io();
-
-    const form = document.getElementById('form');
-    const input = document.getElementById('input');
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (input.value) {
-            socket.emit('app_clavardage', input.value);
-            input.value =''
-        }
-    })
-   </script>-->
 
 </body>
 </html>
