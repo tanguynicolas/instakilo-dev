@@ -28,11 +28,16 @@ docker push tanguynicolas/instakilo-node:latest
 ```bash
 docker network create instakilo-network
 
-docker run -d --rm -p 3000:3000 --network instakilo-network --name instakilo-node  instakilo-node
-docker run -d --rm -p 80:80     --network instakilo-network --name instakilo-nginx instakilo-nginx
+docker run  -d  --rm            --network instakilo-network  --name instakilo-node   instakilo-node
+docker run  -d  --rm  -p 80:80  --network instakilo-network  --name instakilo-nginx  instakilo-nginx
 ```
 
 ## Docker : déploiement multiple
 ```bash
-docker compose up -d
+# En construisant l'image en local
+docker compose  --file compose-local_build.yaml  up  -d
+
+# En utilisant l'image distante
+docker compose  --file compose-pull_remote.yaml  up  -d
 ```
+On peut rebuild les images si les fichiers on été modifiés (en tout cas en local) avec l'option `--build`.
