@@ -25,7 +25,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: ./nodejs
+          context: "{{defaultContext}}:/nodejs"
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/instakilo-node:latest
@@ -33,7 +33,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: ./nginx
+          context: "{{defaultContext}}::nginx"
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/instakilo-nginx:latest
