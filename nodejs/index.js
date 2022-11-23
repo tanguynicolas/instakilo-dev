@@ -1,9 +1,15 @@
 //Instanciations
-const app = require('express')();
+const express = require('express');
+const app = express();
 
 const server = require('http').createServer(app);
 
 const io = require("socket.io")(server);
+
+const path = require('path');
+
+//Route pour les importations de fichiers (Necessaire pour le css)
+app.use(express.static(__dirname + '/public'));
 
 
 //Création de la route /
@@ -23,7 +29,7 @@ io.on('connection', (socket) => {
    //Gestion du tchat
    socket.on('chat_message', (msg) => {
         //Envoi du message aux utilisateurs connectés
-        io.emit("chat_message", msg);
+        io.emit("received_message", msg);
    })
 });
 
