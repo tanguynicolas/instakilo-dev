@@ -1,2 +1,25 @@
 version: "3.8"
+services:
+  node:
+    #image: instakilo-node
+    build:
+      context: ./nodejs
+    container_name: instakilo-node
+    networks:
+      - instakilo-network
+
+  nginx:
+    #image: instakilo-nginx
+    build:
+      context: ./nginx
+    container_name: instakilo-nginx
+    ports:
+      - "80:80"
+    networks:
+      - instakilo-network
+    depends_on:
+      - node
+
+networks:
+  instakilo-network:
 
