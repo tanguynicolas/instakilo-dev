@@ -1,6 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body{
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+    }
+    #messages{
+            border: 1px solid black;
+            height: 90vh;
+        }
 
-<h2>hello, world !!!, how are you</h2>
+        #messages p{
+            margin: 0;
+            padding: 10px;
+        }
 
+        #messages  :nth-child(odd){
+            background-color: #aaa;
+        }
+        form{
+          display: flex;
+        }
+        #nom{
+            flex: 1;
+            padding: 10px;             
+        }
+        #message{
+            flex: 5;
+            padding: 10px;
+        }
+        button{
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background-color: #839dfe;
+            color: white;
+        }
+  </style>
+    <title>Instakilo</title>
+</head>
+<body>
+    <div id="messages">
+    </div>
+    <form action="">
+        <input type="text" id="nom" placeholder="Entrez votre nom">
+        <input type="text" id="message" placeholder="Tapez tre message">
+        <button>Envoyer</button>
+    </form>
+
+
+
+
+   <script src="/socket.io/socket.io.js"></script>
+   <script>
+    const socket = io();
+
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (input.value) {
+            socket.emit('app_clavardage', input.value);
+            input.value =''
+        }
+    })
+   </script> 
+</body>
 </html>
