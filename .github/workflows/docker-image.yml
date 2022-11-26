@@ -59,8 +59,8 @@ jobs:
           key: ${{ env.private_key }}
           passphrase: ${{ env.passphrase }}
           port: ${{ env.port }}
-          source: "./"
-          target: "compose-pull_remote.yaml"
+          source: "compose-pull_remote.yaml"
+          target: "./"
           
       - name: Do the docker compose up
         uses: appleboy/ssh-action@master
