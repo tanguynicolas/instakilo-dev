@@ -1,25 +1,25 @@
 version: "3.8"
 services:
   node:
-    image: tanguynicolas/instakilo-node
+    image: tanguynicolas/instakilo-node-local
     build:
       context: ./nodejs
     container_name: instakilo-node
     networks:
-      - instakilo-network
+      - instakilo-network-local
 
   nginx:
-    image: tanguynicolas/instakilo-nginx
+    image: tanguynicolas/instakilo-nginx-local
     build:
       context: ./nginx
     container_name: instakilo-nginx
     ports:
       - "80:80"
     networks:
-      - instakilo-network
+      - instakilo-network-local
     depends_on:
       - node
 
 networks:
-  instakilo-network:
+  instakilo-network-local:
 
