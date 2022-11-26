@@ -77,4 +77,4 @@ jobs:
           port: ${{ env.port }}
           script: |
             ls -la
-            #docker compose --file compose-pull_remote.yaml up -d --build
+            docker compose --file compose-pull_remote.yaml up -d --build
