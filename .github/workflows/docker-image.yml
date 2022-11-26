@@ -28,7 +28,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: "{{defaultContext}}:/nodejs"
-          platforms: linux/amd64,linux/arm
+          platforms: linux/amd64,linux/arm64/v8
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/instakilo-node:latest
@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: "{{defaultContext}}:/nginx"
-          platforms: linux/amd64,linux/arm
+          platforms: linux/amd64,linux/arm64/v8
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/instakilo-nginx:latest
