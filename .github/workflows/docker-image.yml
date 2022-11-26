@@ -59,5 +59,17 @@ jobs:
           key: ${{ env.private_key }}
           passphrase: ${{ env.passphrase }}
           port: ${{ env.port }}
-          source: "compose-pull_remote.yaml"
+          source: "./"
           target: "compose-pull_remote.yaml"
+          
+      - name: Do the docker compose up
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.host }}
+          username: ${{ env.username }}
+          key: ${{ env.private_key }}
+          passphrase: ${{ env.passphrase }}
+          port: ${{ env.port }}
+          script: |
+            ls -la
+            #docker compose --file compose-pull_remote.yaml up -d --build
