@@ -76,4 +76,5 @@ jobs:
           passphrase: ${{ env.passphrase }}
           port: ${{ env.port }}
           script: |
-            docker compose --file compose-pull_remote.yaml up -d --build
+            docker compose --file compose-pull_remote.yaml pull
+            docker compose --file compose-pull_remote.yaml restart
