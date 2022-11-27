@@ -2,12 +2,14 @@ version: "3.8"
 services:
   node:
     image: tanguynicolas/instakilo-node
+    pull_policy: always
     container_name: instakilo-node
     networks:
       - instakilo-network
 
   nginx:
     image: tanguynicolas/instakilo-nginx
+    pull_policy: always
     container_name: instakilo-nginx
     ports:
       - "80:80"
