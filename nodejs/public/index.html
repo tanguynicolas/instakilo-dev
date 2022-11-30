@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instakilo</title>
+</head>
+<body>
+    <div class="app">
+       <div class="screen join-screen active">
+          <div class="form">
+            <h2>Bienvenue sur Instakilo  Joindre le chat</h2>
+            <div class="form-input">
+                <label>Nom d'utilisateur</label>
+                <input type="text" id="username">
+            </div>
+            <div class="form-input">
+                <button id="join-user">Joindre</button>
+            </div>
+          </div>  
+       </div>
+       <div class="screen chat-screen ">
+         <div class="header">
+            <div class="logo">Instakilo</div>
+            <button id="exit-chat">Quitter</button>
+         </div>
+         <div class="messages">
+         </div>
+         <div class="typeBox">
+            <input type="text" id="message-input">
+            <button id="send-message">Envoyer</button>
+         </div>
+       </div>
+    </div>
+
+
+    <script type="text/javascript" src="socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
