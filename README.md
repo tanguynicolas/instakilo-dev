@@ -41,3 +41,13 @@ docker compose  --file compose-local_build.yaml  up  -d
 docker compose  --file compose-pull_remote.yaml  up  -d
 ```
 On peut rebuild les images si les fichiers on été modifiés (en tout cas en local) avec l'option `--build`.
+Pour le remote il faudra faire un compose pull, et avoir delete les container au préalable avec docker down.
+
+## Générer des avatars
+J'ai utilisé la commande suivante.
+```bash
+bash -c 'for i in {1..50}; do curl -LO https://api.multiavatar.com/${i}.png ; done'
+```
+Les images sont différentes en fonction de leur nom (p. ex. gerard.png) ; c'est une IA derrière cette API.
+Pour générer les images en .svg, omettez l'extension.
+
