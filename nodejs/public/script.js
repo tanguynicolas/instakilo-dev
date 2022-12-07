@@ -3,27 +3,29 @@
   const socket = io();
 
   let uname;
-  // changement click en submit
+  let uavatar;
+
+
   app
-    .querySelector(".join-screen #join-user")
-    .addEventListener("click", function () {
-      let username = app.querySelector(".join-screen #username").value;
-      if (username.length === 0) {
-        return;
-      }
-      socket.emit("newuser", username);
-      uname = username;
-      app.querySelector(".join-screen").classList.remove("active");
-      app.querySelector(".chat-screen").classList.add("active");
+    .querySelector("#join-user")
+    .addEventListener("click", function(event) {
+        let username = app.querySelector(".join-screen #username").value;
+        let rand = Math.floor(Math.random() * 50);
+        let avatar = `img/${rand}.png`;
+        if (username.length === 0) {
+          return;
+        }
+        socket.emit("newuser", username);
+        uname = username;
+        uavatar = avatar;
+        app.querySelector(".join-screen").classList.remove("active");
+        app.querySelector(".chat-screen").classList.add("active");
     });
 
-  //app
-  //  .querySelector(".chat-screen #send-message")
-  //  .addEventListener("keyup", function(event) {
-
-    document.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-        let message = app.querySelector(".chat-screen #message-input").value;
+  app
+    .querySelector(".chat-screen #send-message")
+    .addEventListener("click", function(event) {
+      let message = app.querySelector(".chat-screen #message-input").value;
         if (message.length === 0) {
           return;
         }
@@ -34,11 +36,29 @@
         socket.emit("chat", {
           username: uname,
           text: message,
+          img: uavatar,
         });
-        // Cette ligne va permettre de vider à chaque envoie
         app.querySelector(".chat-screen #message-input").value = "";
-      }
     });
+
+  document.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+      let message = app.querySelector(".chat-screen #message-input").value;
+      if (message.length === 0) {
+        return;
+      }
+      renderMessage("my", {
+        username: uname,
+        text: message,
+      });
+      socket.emit("chat", {
+        username: uname,
+        text: message,
+        img: uavatar,
+      });
+      app.querySelector(".chat-screen #message-input").value = "";
+    }
+  });
 
   app
     .querySelector(".chat-screen #exit-chat")
@@ -70,7 +90,7 @@
       el.setAttribute("class", "message  other-message");
       el.innerHTML = `
         <div>
-        <div class="name">${message.username}</div>
+        <div class="name"><img class="avatar" src=${message.img}> ${message.username}</div>
         <div class="texte">${message.text}</div>
         </div>
               `;
