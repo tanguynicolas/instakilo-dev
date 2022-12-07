@@ -17,23 +17,27 @@
       app.querySelector(".chat-screen").classList.add("active");
     });
 
-  app
-    .querySelector(".chat-screen #send-message")
-    .addEventListener("click", function () {
-      let message = app.querySelector(".chat-screen #message-input").value;
-      if (message.length === 0) {
-        return;
+  //app
+  //  .querySelector(".chat-screen #send-message")
+  //  .addEventListener("keyup", function(event) {
+
+    document.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+        let message = app.querySelector(".chat-screen #message-input").value;
+        if (message.length === 0) {
+          return;
+        }
+        renderMessage("my", {
+          username: uname,
+          text: message,
+        });
+        socket.emit("chat", {
+          username: uname,
+          text: message,
+        });
+        // Cette ligne va permettre de vider à chaque envoie
+        app.querySelector(".chat-screen #message-input").value = "";
       }
-      renderMessage("my", {
-        username: uname,
-        text: message,
-      });
-      socket.emit("chat", {
-        username: uname,
-        text: message,
-      });
-      // Cette ligne va permettre de vider à chaque envoie
-      app.querySelector(".chat-screen #message-input").value = "";
     });
 
   app
