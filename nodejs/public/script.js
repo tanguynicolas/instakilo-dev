@@ -32,6 +32,7 @@
         renderMessage("my", {
           username: uname,
           text: message,
+          img: uavatar,
         });
         socket.emit("chat", {
           username: uname,
@@ -50,6 +51,7 @@
       renderMessage("my", {
         username: uname,
         text: message,
+        img: uavatar,
       });
       socket.emit("chat", {
         username: uname,
@@ -80,7 +82,7 @@
       el.setAttribute("class", "message my-message");
       el.innerHTML = `
            <div>
-           <div class="name">Toi</div>
+           <div class="name"><img class="avatar" src=${message.img}>Toi</div>
            <div class="text">${message.text}</div>
            </div>
            `;
