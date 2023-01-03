@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instakilo</title>
@@ -17,20 +19,34 @@
                 <input type="text" id="username" autofocus>
             </div>
             <div class="form-input">
-                <button id="join-user">Joindre</button>
+                <button type="submit" id="join-user">Joindre</button>
             </div>
           </div>  
        </div>
-       <div class="screen chat-screen ">
+       <div class="screen chat-screen">
          <div class="header">
             <div class="logo">Instakilo</div>
             <button id="exit-chat">Quitter</button>
          </div>
-         <div class="messages">
-         </div>
+          <input type="checkbox" id="check">
+          <label for="check">
+             <img src="img/user1.png" alt="" id="toggle-off">
+             <img src="img/user.png" alt="" id="toggle-on">
+          </label>
+          <div class="sidebar">
+                 <!--div id="menu" class="fa-solid fa-toggle-off fa-2xl"></div-->
+                 <header>Que se passe t'il ?</header>
+                 <!--ul>
+                   <li><a href="#"><i class="fas fa-qrcode"></i>Djeneba</a></li>
+                   <li><a href="#"><i class="fas fa-link"></i>DIAKITE</a></li>
+                   <li><a href="#"><i class="fas fa-stream"></i>KABA</a></li>
+                 </!--ul-->
+               </div>
+         <div class="messages"></div>
+         <div id="writting"></div>
          <div class="typeBox">
             <input type="text" id="message-input" autofocus>
-            <button id="send-message">Envoyer</button>
+            <button  id="send-message">Envoyer</button>
          </div>
        </div>
     </div>

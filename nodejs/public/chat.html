@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Instakilo</title>
+</head>
+<body>
+    <div class="app">
+        <div class="screen chat-screen  ">
+            <div class="header">
+               <div class="logo">Instakilo</div>
+               <button id="exit-chat">Quitter</button>
+            </div>
+            <main class="chat-main">
+                <input type="checkbox" id="check">
+                <label for="check">
+                  <i class="fa-solid fa-toggle-on" id="toggle-on"></i>
+                  <i class="fa-solid fa-toggle-off" id="toggle-off"></i>
+                </label>
+                <div class="sidebar">
+                  <!--div id="menu" class="fa-solid fa-toggle-off fa-2xl"></div-->
+                  <header>Que se passe t'il ?</header>
+                  <!--ul>
+                    <li><a href="#"><i class="fas fa-qrcode"></i>Djeneba</a></li>
+                    <li><a href="#"><i class="fas fa-link"></i>DIAKITE</a></li>
+                    <li><a href="#"><i class="fas fa-stream"></i>KABA</a></li>
+                  </!--ul-->
+                </div>
+           <!--nav class="navbar">
+              <a href="#" class="fonction"> Que se passe t-il ?</a>
+                <a href="#">L'utilisateur vient de se conecter</a></li>
+                <a href="#">L'utilisateur vient de se conecter</a></li>
+                <a href="#">L'utilisateur vient de se conecter</a></li>
+          </nav-->
+          <!--header>
+            <div id="menu" class="fas fa-bars"></div>
+        
+            <nav class="navbar">
+                <a href="#home">Accueil</a>
+                <a href="#about">A propos</a>
+                <a href="#portfolio">portfolio</a>
+                <a href="#contact">contact</a>
+            </nav>
+        
+            <div id="theme-toggler" class="fas fa-moon"></div>
+        </!--header-->
+            <div class="messages">
+            </div>
+        </main> 
+           
+        </div>   
+    </div>
+   
+    
+    <script type="text/javascript" src="socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

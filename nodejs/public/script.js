@@ -5,44 +5,41 @@
   let uname;
   let uavatar;
 
-
-  app
-    .querySelector("#join-user")
-    .addEventListener("click", function(event) {
-        let username = app.querySelector(".join-screen #username").value;
-        let rand = Math.floor(Math.random() * 50);
-        let avatar = `img/${rand}.png`;
-        if (username.length === 0) {
-          return;
-        }
-        socket.emit("newuser", username);
-        uname = username;
-        uavatar = avatar;
-        app.querySelector(".join-screen").classList.remove("active");
-        app.querySelector(".chat-screen").classList.add("active");
-    });
+  app.querySelector("#join-user").addEventListener("click", function (event) {
+    let username = app.querySelector(".join-screen #username").value;
+    let rand = Math.floor(Math.random() * 50);
+    let avatar = `img/${rand}.png`;
+    if (username.length === 0) {
+      return;
+    }
+    socket.emit("newuser", username);
+    uname = username;
+    uavatar = avatar;
+    app.querySelector(".join-screen").classList.remove("active");
+    app.querySelector(".chat-screen").classList.add("active");
+  });
 
   app
     .querySelector(".chat-screen #send-message")
-    .addEventListener("click", function(event) {
+    .addEventListener("click", function (event) {
       let message = app.querySelector(".chat-screen #message-input").value;
-        if (message.length === 0) {
-          return;
-        }
-        renderMessage("my", {
-          username: uname,
-          text: message,
-        });
-        socket.emit("chat", {
-          username: uname,
-          text: message,
-          img: uavatar,
-        });
-        app.querySelector(".chat-screen #message-input").value = "";
+      if (message.length === 0) {
+        return;
+      }
+      renderMessage("my", {
+        username: uname,
+        text: message,
+      });
+      socket.emit("chat", {
+        username: uname,
+        text: message,
+        img: uavatar,
+      });
+      app.querySelector(".chat-screen #message-input").value = "";
     });
 
-  document.addEventListener("keyup", function(event) {
-      if (event.keyCode === 13) {
+  document.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
       let message = app.querySelector(".chat-screen #message-input").value;
       if (message.length === 0) {
         return;
@@ -74,6 +71,8 @@
     renderMessage("other", message);
   });
   function renderMessage(type, message) {
+    const sidebar = document.getElementsByClassName("sidebar")[0];
+    sidebar.insertAdjacentHTML("afterbegin", `<div class="qui">${type}</div>`);
     let messageContainer = app.querySelector(".chat-screen .messages");
     if (type === "my") {
       let el = document.createElement("div");
@@ -105,4 +104,11 @@
     messageContainer.scrollTop =
       messageContainer.scrollHeight - messageContainer.clientHeight;
   }
+  socket.on("usertyping", (type, msg) => {
+    const writting = document.querySelector("#writting");
+    writting.innerHTML = `${type.name} est entrain d'ecrire...`;
+    setTimeout(function () {
+      writting.innerHTML = "";
+    }, 5000);
+  });
 })();
