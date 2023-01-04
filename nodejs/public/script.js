@@ -23,21 +23,6 @@
     .querySelector(".chat-screen #send-message")
     .addEventListener("click", function (event) {
       let message = app.querySelector(".chat-screen #message-input").value;
-<<<<<<< HEAD
-      if (message.length === 0) {
-        return;
-      }
-      renderMessage("my", {
-        username: uname,
-        text: message,
-      });
-      socket.emit("chat", {
-        username: uname,
-        text: message,
-        img: uavatar,
-      });
-      app.querySelector(".chat-screen #message-input").value = "";
-=======
         if (message.length === 0) {
           return;
         }
@@ -52,7 +37,6 @@
           img: uavatar,
         });
         app.querySelector(".chat-screen #message-input").value = "";
->>>>>>> 1356f0d437c73cba4e3c39a05ca251e77b8605b6
     });
 
   document.addEventListener("keyup", function (event) {
