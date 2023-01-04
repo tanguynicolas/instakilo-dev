@@ -2,6 +2,7 @@
   const app = document.querySelector(".app");
   const socket = io();
 
+  //uname et uavatar contiennent 
   let uname;
   let uavatar;
 
@@ -73,8 +74,9 @@
     renderMessage("other", message);
   });
   function renderMessage(type, message) {
-    const sidebar = document.getElementsByClassName("sidebar")[0];
-    sidebar.insertAdjacentHTML("afterbegin", `<div class="qui">${type}</div>`);
+    const sidebar = document.querySelector(".sidebar");
+    if (type === "my") {aecrire = "Toi a écrit : " + message.text}
+    sidebar.insertAdjacentHTML("beforeend", `<div class="qui">${aecrire}</div>`);
     let messageContainer = app.querySelector(".chat-screen .messages");
     if (type === "my") {
       let el = document.createElement("div");
