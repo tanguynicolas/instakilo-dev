@@ -2,13 +2,17 @@
   const app = document.querySelector(".app");
   const socket = io();
 
-  //uname et uavatar contiennent 
+  //uname et uavatar contiennent le nom et l'avatar de l'utilisateur
   let uname;
   let uavatar;
 
+  //Quand on clique sur le bouton "Joindre"
   app.querySelector("#join-user").addEventListener("click", function (event) {
+    //Récupère le nom entré pour l'utilisateur
     let username = app.querySelector(".join-screen #username").value;
+    //Prend une valeur random entre 0 et 50
     let rand = Math.floor(Math.random() * 50);
+    //Associe
     let avatar = `img/${rand}.png`;
     if (username.length === 0) {
       return;
@@ -74,9 +78,7 @@
     renderMessage("other", message);
   });
   function renderMessage(type, message) {
-    const sidebar = document.querySelector(".sidebar");
-    if (type === "my") {aecrire = "Toi a écrit : " + message.text}
-    sidebar.insertAdjacentHTML("beforeend", `<div class="qui">${aecrire}</div>`);
+    const sidebar = document.getElementsByClassName("sidebar")[0];
     let messageContainer = app.querySelector(".chat-screen .messages");
     if (type === "my") {
       let el = document.createElement("div");
@@ -88,6 +90,8 @@
            </div>
            `;
       messageContainer.appendChild(el);
+      aecrire = "Toi a écrit : " + message.text;
+      sidebar.insertAdjacentHTML("beforeend", `<div class="qui">${aecrire}</div>`);
     } else if (type === "other") {
       let el = document.createElement("div");
       el.setAttribute("class", "message  other-message");
@@ -98,11 +102,15 @@
         </div>
               `;
       messageContainer.appendChild(el);
+      aecrire = "Message reçu : " + message.text;
+      sidebar.insertAdjacentHTML("beforeend", `<div class="qui">${aecrire}</div>`);
     } else if (type == "update") {
       let el = document.createElement("div");
       el.setAttribute("class", "update");
       el.innerText = message;
       messageContainer.appendChild(el);
+      aecrire = "Une personne s'est connectée ";
+      sidebar.insertAdjacentHTML("beforeend", `<div class="qui">${aecrire}</div>`);
     }
     // scroller les messages à partie du dernier
     messageContainer.scrollTop =
