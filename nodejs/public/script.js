@@ -146,8 +146,14 @@
       el.setAttribute("class", "update");
       el.innerText = message;
       messageContainer.appendChild(el);
+      var seConnecte = message.indexOf("rejoint");
       //Envoie ce qu'il se passe pour la sidebar
-      aecrire = "Une personne s'est connectée ";
+      if(seConnecte !== -1){
+        aecrire = "Utilisateur connecté";
+      } else {
+        aecrire = "Utilisateur déconnecté";
+      }
+      
       sidebar.insertAdjacentHTML(
         "beforeend",
         `<div class="qui">${aecrire}</div>`

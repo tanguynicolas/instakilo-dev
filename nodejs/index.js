@@ -21,16 +21,7 @@ io.on("connection", function (socket) {
   socket.on("exituser", function (username) {
     // envoyer de telle sorte que le message que j'envoie qu'on ne me l'envoie pas
     socket.broadcast.emit("update", username + " à quitté la conversation");
-    
   });
-  // Pour l'ecoute dans le sidebar lorsque l'utilisateur doit
-  socket.on("side", function(username){
-    socket.broadcast.emit(
-      "sidebar",
-      username +
-        "a arrêté d'écouter dans le tuyau qui le relie au serveur, il n'entend donc plus les messages."
-    );
-  })
   socket.on("chat", function (message) {
     // envoyer de telle sorte que le message que j'envoie qu'on ne me l'envoie pas
     socket.broadcast.emit("chat", message);
