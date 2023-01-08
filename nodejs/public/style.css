@@ -32,7 +32,6 @@ body {
 
 .sidebar{
     position: absolute;
-    left: -340px;
     z-index: -999;
     width: 25%;
     height: 80%;
@@ -40,6 +39,9 @@ body {
     transition: all .5s ease;
     overflow: auto;
     margin-top: 10px;
+    z-index: -999;
+    display: block;
+
 }
 
 .sidebar header{
