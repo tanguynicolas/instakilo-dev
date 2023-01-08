@@ -31,16 +31,14 @@ body {
 }
 
 .sidebar{
-    position: absolute;
-    z-index: -999;
+    position: fixed;
+    left: -999px;
     width: 25%;
-    height: 80%;
+    height: calc(100% - 100px);
     background: #15aabf;
     transition: all .5s ease;
     overflow: auto;
-    z-index: -999;
     display: block;
-
 }
 
 .sidebar header{
