@@ -33,6 +33,7 @@ body {
 .sidebar{
     position: absolute;
     left: -340px;
+    z-index: -999;
     width: 25%;
     height: 80%;
     background: #15aabf;
@@ -146,7 +147,7 @@ label #toggle-on{
     padding: 0px 20px;
     justify-content: space-between;
 }
-.chat-screen .header .logo{
+.chat-screen .header .info {
     font-size: 18px;
     color: #eee;
     font-weight: 600;
