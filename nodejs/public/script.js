@@ -6,7 +6,6 @@
   let uname;
   let uavatar;
 
-
   //Quand on clique sur le bouton "Joindre"
   app.querySelector("#join-user").addEventListener("click", function (event) {
     //Récupère le nom entré pour l'utilisateur
@@ -26,33 +25,31 @@
     app.querySelector(".join-screen").classList.remove("active");
     app.querySelector(".chat-screen").classList.add("active");
   });
-
-
   //Quand on clique sur "Envoyer" Envoie le message
   app
     .querySelector(".chat-screen #send-message")
     .addEventListener("click", function (event) {
       //Stock le contenu de la textbox dans message
       let message = app.querySelector(".chat-screen #message-input").value;
-        //Si la textbox est vide, n'envoie rien
-        if (message.length === 0) {
-          return;
-        }
-        //Crée le rendu du message avec le nom, l'avatar de l'utilisateur et le contenu du message
-        renderMessage("my", {
-          username: uname,
-          text: message,
-          img: uavatar,
-        });
+      //Si la textbox est vide, n'envoie rien
+      if (message.length === 0) {
+        return;
+      }
+      //Crée le rendu du message avec le nom, l'avatar de l'utilisateur et le contenu du message
+      renderMessage("my", {
+        username: uname,
+        text: message,
+        img: uavatar,
+      });
 
-        //Envoi un signal socket avec les données du message
-        socket.emit("chat", {
-          username: uname,
-          text: message,
-          img: uavatar,
-        });
-        //Vide la textbox
-        app.querySelector(".chat-screen #message-input").value = "";
+      //Envoi un signal socket avec les données du message
+      socket.emit("chat", {
+        username: uname,
+        text: message,
+        img: uavatar,
+      });
+      //Vide la textbox
+      app.querySelector(".chat-screen #message-input").value = "";
     });
 
   //Fait la même chose quand on appuie sur la touche "Entrée"
@@ -75,7 +72,6 @@
       app.querySelector(".chat-screen #message-input").value = "";
     }
   });
-
   //Quand on clique sur le bouton Quitter
   app
     .querySelector(".chat-screen #exit-chat")
@@ -86,7 +82,6 @@
       window.location.href = window.location.href;
     });
 
-
   //Quand un signal socket est detecté, envoie ses informations à la fonction renderMessage
   socket.on("update", function (update) {
     renderMessage("update", update);
@@ -94,8 +89,6 @@
   socket.on("chat", function (message) {
     renderMessage("other", message);
   });
-
-
 
   //Fonction de tri des signaux sockets
   function renderMessage(type, message) {
@@ -119,11 +112,13 @@
       messageContainer.appendChild(el);
 
       //Envoie ce qu'il se passe pour la sidebar
-      aecrire = "Toi a écrit : " + message.text;
-      sidebar.insertAdjacentHTML("beforeend", `<div class="qui">${aecrire}</div>`);
+      aecrire = "Message envoyé ";
+      sidebar.insertAdjacentHTML(
+        "beforeend",
+        `<div class="qui">${aecrire}</div>`
+      );
 
-
-    /*Si le signal socket est de type "other" 
+      /*Si le signal socket est de type "other" 
     >>>> MESSAGE RECU DE QUELQU'UN D'AUTRE <<<<*/
     } else if (type === "other") {
       //Crée une div "Autre message" qui s'affichera à gauche avec l'avatar, le nom et le contenu du message de l'auteur
@@ -137,10 +132,13 @@
               `;
       messageContainer.appendChild(el);
       //Envoie ce qu'il se passe pour la sidebar
-      aecrire = "Message reçu : " + message.text;
-      sidebar.insertAdjacentHTML("beforeend", `<div class="qui">${aecrire}</div>`);
+      aecrire = "Message reçu : ";
+      sidebar.insertAdjacentHTML(
+        "beforeend",
+        `<div class="qui">${aecrire}</div>`
+      );
 
-    /*Si le signal socket est de type "update" 
+      /*Si le signal socket est de type "update" 
     >>>> QUELQU'UN S'EST DECONNECTE <<<<*/
     } else if (type == "update") {
       //Crée une div "update" qui s'affichera au milieu avec le nom de l'utilisateur concerné
@@ -150,13 +148,61 @@
       messageContainer.appendChild(el);
       //Envoie ce qu'il se passe pour la sidebar
       aecrire = "Une personne s'est connectée ";
-      sidebar.insertAdjacentHTML("beforeend", `<div class="qui">${aecrire}</div>`);
+      sidebar.insertAdjacentHTML(
+        "beforeend",
+        `<div class="qui">${aecrire}</div>`
+      );
     }
 
     // Permer de scroller si il y a trop de message
     messageContainer.scrollTop =
       messageContainer.scrollHeight - messageContainer.clientHeight;
   }
+  /*app.addEventListener(
+    "click",
+    () => {
+      // const button = document.querySelector("button");
+      // button.addEventListener("click", function () {
+      //   alert("bonjour");
+      //});
+      const server = document.domain;
+      // let html = "<p>paragraphe</p>"
+      document.getElementById("sidebar").insertAdjacentHTML(
+        "beforeend",
+        `<div>Bonjour Ali</div>
+      ${server}
+      <div></div>`
+      );
+      //document.querySelector("input").addEventListener("keydown", (e) => {
+      // console.log("keydown", e);
+      //});
+      // event.stopPropagation();
+      document
+        .getElementById("sidebar")
+        .insertAdjacentHTML("beforeend", `<p>coucou</p>`);
+    },
+    { once: true }
+  );/** */
+  //function maFunction(/**event*/) {
+  // const button = document.querySelector("button");
+  // button.addEventListener("click", function () {
+  //   alert("bonjour");
+  //});
+  //const server = document.domain;
+  // let html = "<p>paragraphe</p>"
+  //document.getElementById("sidebar").insertAdjacentHTML(
+  //  "beforeend",
+  //  `<div>Bonjour Ali</div>
+  //  ${server}
+  //  <div></div>`
+  //  );
+  // event.stopPropagation();
+  //  document
+  //    .getElementById("sidebar")
+  //    .insertAdjacentHTML("beforeend", `<p>coucou</p>`);
+  // }
+
+  //*/
 
   //Envoi un signal socket lorqu'un utilisateur écrit
   //NON FONCTIONNEL
