@@ -146,6 +146,7 @@
       el.setAttribute("class", "update");
       el.innerText = message;
       messageContainer.appendChild(el);
+      //Si le message reçu contient "rejoint", alors c'est une connexion
       var seConnecte = message.indexOf("rejoint");
       //Envoie ce qu'il se passe pour la sidebar
       if(seConnecte !== -1){
