@@ -43,10 +43,17 @@ body {
 
 .sidebar header{
     color: #eee;
+    position: fixed;
     text-align: center;
     line-height: 70px;
+    width: 25%;
+    margin-bottom: 70px;
     background: #e64980;
     user-select: none;
+}
+
+.sidebar #connect {
+    margin-top: 70px;
 }
 
 #check{
