@@ -112,10 +112,12 @@
       messageContainer.appendChild(el);
 
       //Envoie ce qu'il se passe pour la sidebar
-      aecrire = "Message envoyé ";
+      aecrire = `<h3>Message envoyé :</h3>
+      <span>Votre message est découpé en binaire comme dans l'activité à laquelle vous 
+       avez participé et il est envoyé au serveur par le tuyau.</span>`;
       sidebar.insertAdjacentHTML(
         "beforeend",
-        `<div class="qui">${aecrire}</div>`
+        aecrire
       );
 
       /*Si le signal socket est de type "other" 
@@ -132,10 +134,12 @@
               `;
       messageContainer.appendChild(el);
       //Envoie ce qu'il se passe pour la sidebar
-      aecrire = "Message reçu : ";
+      aecrire = `<h3>Message reçu :</h3>
+      <span>Le message est reçu en binaire depuis le serveur via le tuyau, votre ordinateur
+        le restitue sous forme de texte comme vous l'avez fait dans l'activité.</span>`;
       sidebar.insertAdjacentHTML(
         "beforeend",
-        `<div class="qui">${aecrire}</div>`
+        aecrire
       );
 
       /*Si le signal socket est de type "update" 
@@ -150,20 +154,33 @@
       var seConnecte = message.indexOf("rejoint");
       //Envoie ce qu'il se passe pour la sidebar
       if(seConnecte !== -1){
-        aecrire = "Utilisateur connecté";
+        aecrire = `<h3>Utilisateur connecté :</h3>
+        <span>Un nouvel utilisateur écoute dans le tuyau qui le relie au serveur
+         pour essayer d'entendre des messages.</span>`
       } else {
-        aecrire = "Utilisateur déconnecté";
+        aecrire = `<h3>Utilisateur déconnecté :</h3>
+        <span>Un utilisateur a arrêté d'écouter dans le tuyau qui le relie au serveur,
+         il n'entend donc plus les messages.</span>`
       }
       
       sidebar.insertAdjacentHTML(
         "beforeend",
-        `<div class="qui">${aecrire}</div>`
+        aecrire
       );
     }
 
-    // Permer de scroller si il y a trop de message
+    const queSePasseIl = document.getElementById("QSPT");
+    sidebar.addEventListener('scroll', () => {
+        queSePasseIl.style.width = 'calc(25% - 17px)';
+    });
+
+    // Permer de scroller automatiquement sur les derniers messages
     messageContainer.scrollTop =
       messageContainer.scrollHeight - messageContainer.clientHeight;
+    // De même pour la sidebar
+    sidebar.scrollTop =
+      sidebar.scrollHeight - sidebar.clientHeight;
+    
   }
   /*app.addEventListener(
     "click",
