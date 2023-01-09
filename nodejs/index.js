@@ -27,8 +27,9 @@ io.on("connection", function (socket) {
     socket.broadcast.emit("chat", message);
   });
   // on ecoute les messages tapeés
-  socket.on("typing", (msg) => {
-    socket.broadcast.emit("usertyping", msg);
+  socket.on("usertyping", function (username) {
+    // envoyer de telle sorte que le message que j'envoie qu'on ne me l'envoie pas
+    socket.broadcast.emit("usertyping", username + " est en train d'écrire...");
   });
 });
 

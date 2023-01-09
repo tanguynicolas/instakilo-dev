@@ -5,6 +5,7 @@
   //uname et uavatar contiennent le nom et l'avatar de l'utilisateur
   let uname;
   let uavatar;
+  let boolEstEnTrainDEcrire = 0;
 
   //Quand on clique sur le bouton "Joindre"
   app.querySelector("#join-user").addEventListener("click", function (event) {
@@ -82,12 +83,27 @@
       window.location.href = window.location.href;
     });
 
+  msginput = document.getElementById("message-input");
+  msginput.addEventListener("input", function(){
+    //Si l'event n'a pas été trigger il y a moins de x secondes
+    if(boolEstEnTrainDEcrire == 0){
+      socket.emit("usertyping", uname);
+      boolEstEnTrainDEcrire = 1;
+      setTimeout(function () {
+        boolEstEnTrainDEcrire = 0;
+      }, 10000);
+    }
+  });
+
   //Quand un signal socket est detecté, envoie ses informations à la fonction renderMessage
   socket.on("update", function (update) {
     renderMessage("update", update);
   });
   socket.on("chat", function (message) {
     renderMessage("other", message);
+  });
+  socket.on("usertyping", function (usertyping) {
+    renderMessage("usertyping", usertyping);
   });
 
   //Fonction de tri des signaux sockets
@@ -167,6 +183,22 @@
         "beforeend",
         aecrire
       );
+    /*Si le signal socket est de type "usertyping" 
+    >>>> QUELQU'UN EST EN TRAIN D'ECRIRE <<<<*/
+    } else if (type == "usertyping") {
+      //Change le placeholder de la zone de text pour dire que quelqu'un écrit
+      msginput.placeholder = message;
+      setTimeout(function () {
+        msginput.placeholder = "";
+      }, 10000);
+
+      //Message pour la sidebar
+      aecrire = `<h3>Utilisateur en train d'écrire :</h3>
+      <span>Quelqu'un a modifié le contenu de sa barre de text, ce qui a envoyé un signal au serveur.</span>`
+      sidebar.insertAdjacentHTML(
+        "beforeend",
+        aecrire
+      );
     }
 
     const queSePasseIl = document.getElementById("QSPT");
@@ -182,59 +214,5 @@
       sidebar.scrollHeight - sidebar.clientHeight;
     
   }
-  /*app.addEventListener(
-    "click",
-    () => {
-      // const button = document.querySelector("button");
-      // button.addEventListener("click", function () {
-      //   alert("bonjour");
-      //});
-      const server = document.domain;
-      // let html = "<p>paragraphe</p>"
-      document.getElementById("sidebar").insertAdjacentHTML(
-        "beforeend",
-        `<div>Bonjour Ali</div>
-      ${server}
-      <div></div>`
-      );
-      //document.querySelector("input").addEventListener("keydown", (e) => {
-      // console.log("keydown", e);
-      //});
-      // event.stopPropagation();
-      document
-        .getElementById("sidebar")
-        .insertAdjacentHTML("beforeend", `<p>coucou</p>`);
-    },
-    { once: true }
-  );/** */
-  //function maFunction(/**event*/) {
-  // const button = document.querySelector("button");
-  // button.addEventListener("click", function () {
-  //   alert("bonjour");
-  //});
-  //const server = document.domain;
-  // let html = "<p>paragraphe</p>"
-  //document.getElementById("sidebar").insertAdjacentHTML(
-  //  "beforeend",
-  //  `<div>Bonjour Ali</div>
-  //  ${server}
-  //  <div></div>`
-  //  );
-  // event.stopPropagation();
-  //  document
-  //    .getElementById("sidebar")
-  //    .insertAdjacentHTML("beforeend", `<p>coucou</p>`);
-  // }
 
-  //*/
-
-  //Envoi un signal socket lorqu'un utilisateur écrit
-  //NON FONCTIONNEL
-  socket.on("usertyping", (type, msg) => {
-    const writting = document.querySelector("#writting");
-    writting.innerHTML = `${type.name} est entrain d'ecrire...`;
-    setTimeout(function () {
-      writting.innerHTML = "";
-    }, 5000);
-  });
 })();
