@@ -7,6 +7,9 @@
   let uavatar;
   let boolEstEnTrainDEcrire = 0;
 
+  //Sidebar : Contenu de l'onglet "Que se passe-t-il"
+  const sidebar = document.getElementsByClassName("sidebar")[0];
+
   //Quand on clique sur le bouton "Joindre"
   app.querySelector("#join-user").addEventListener("click", function (event) {
     //Récupère le nom entré pour l'utilisateur
@@ -88,6 +91,11 @@
     //Si l'event n'a pas été trigger il y a moins de x secondes
     if(boolEstEnTrainDEcrire == 0){
       socket.emit("usertyping", uname);
+      sidebar.insertAdjacentHTML(
+        "beforeend",
+        `<h3>Vous êtes en train d'écrire :</h3>
+      <span>Votre barre de text a été modifié, ce qui a envoyé un signal au serveur et prévenir les autres utilisateurs.</span>`
+      );
       boolEstEnTrainDEcrire = 1;
       setTimeout(function () {
         boolEstEnTrainDEcrire = 0;
@@ -108,8 +116,6 @@
 
   //Fonction de tri des signaux sockets
   function renderMessage(type, message) {
-    //Sidebar : Contenu de l'onglet "Que se passe-t-il"
-    const sidebar = document.getElementsByClassName("sidebar")[0];
     //MessageContainer : Contenu du tchat
     let messageContainer = app.querySelector(".chat-screen .messages");
 
@@ -194,7 +200,7 @@
 
       //Message pour la sidebar
       aecrire = `<h3>Utilisateur en train d'écrire :</h3>
-      <span>Quelqu'un a modifié le contenu de sa barre de text, ce qui a envoyé un signal au serveur.</span>`
+      <span>Quelqu'un a modifié le contenu de sa barre de text, ce qui vous permet de savoir qu'il écrit.</span>`
       sidebar.insertAdjacentHTML(
         "beforeend",
         aecrire
