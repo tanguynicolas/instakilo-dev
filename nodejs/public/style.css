@@ -41,10 +41,15 @@ body {
     display: block;
 }
 
+.sidebar span {
+    color: #eee;
+}
+
 .sidebar header{
     color: #eee;
     position: fixed;
     text-align: center;
+    font-weight: 600;
     line-height: 70px;
     width: 25%;
     margin-bottom: 70px;
